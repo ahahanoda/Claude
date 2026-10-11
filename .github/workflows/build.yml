@@ -1,1 +1,13 @@
-
+name: build
+on: [push, workflow_dispatch]
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: unzip -q WifiChat.zip
+      - run: bash WifiChat/build.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: WifiChat-apk
+          path: WifiChat/build/WifiChat.apk
